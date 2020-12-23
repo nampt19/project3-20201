@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_dashboard"
+        android:icon="@drawable/ic_baseline_bar_chart_24"
+        android:title="Báo cáo"
+        />
+    <item
+        android:id="@+id/nav_care_customer"
+        android:icon="@drawable/ic_baseline_care_24"
+        android:title="Chăm sóc"
+        />
+    <item
+        android:id="@+id/nav_transaction"
+        android:icon="@drawable/ic_baseline_attach_money_24"
+        android:title="Giao dịch"
+        />
+    <item
+        android:id="@+id/nav_more"
+        android:icon="@drawable/ic_baseline_more_horiz_24"
+        android:title="Thêm"
+        />
+</menu>
