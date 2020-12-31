@@ -15,7 +15,7 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 
 public class CommonController {
-    public static final String IP_ADDRESS = "http://192.168.1.230:8080";
+    public static final String IP_ADDRESS = "http://192.168.43.18:8080";
 
     public CommonController() {
     }

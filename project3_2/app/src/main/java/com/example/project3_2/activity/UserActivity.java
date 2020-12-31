@@ -33,6 +33,7 @@ public class UserActivity extends AppCompatActivity {
     ListView lvUser;
     List<UserModel> userModelList;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

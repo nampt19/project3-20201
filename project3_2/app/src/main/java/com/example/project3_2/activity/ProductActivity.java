@@ -6,11 +6,15 @@ import androidx.appcompat.widget.Toolbar;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.Filter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -31,8 +35,9 @@ import java.util.List;
 
 public class ProductActivity extends AppCompatActivity {
     List<Product> productModels;
-    ArrayAdapter<Product> productAdapter;
+    ProductAdapter productAdapter;
     ListView lvProduct;
+    EditText searchProduct;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,24 +49,45 @@ public class ProductActivity extends AppCompatActivity {
     }
 
     private void addEvent() {
-        lvProduct.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//        lvProduct.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Intent intentReply = new Intent();
+//                intentReply.putExtra("id_product", productModels.get(position).getId());
+//                intentReply.putExtra("name_product", productModels.get(position).getName());
+//                intentReply.putExtra("price_product", productModels.get(position).getPrice());
+//                setResult(34, intentReply);
+//                finish();
+//            }
+//        });
+
+        searchProduct.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intentReply = new Intent();
-                intentReply.putExtra("id_product", productModels.get(position).getId());
-                intentReply.putExtra("name_product", productModels.get(position).getName());
-                intentReply.putExtra("price_product", productModels.get(position).getPrice());
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
 
-                setResult(34, intentReply);
-                finish();
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                productAdapter.getFilter().filter(s);
+                productAdapter.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
+
     }
 
     private void addControl() {
+        searchProduct = findViewById(R.id.searchProduct);
+
         lvProduct = findViewById(R.id.lvProduct);
         new ProductListTask().execute();
+
     }
 
 
@@ -87,7 +113,7 @@ public class ProductActivity extends AppCompatActivity {
             super.onPostExecute(products);
             try {
                 productModels = products;
-                productAdapter = new ProductAdapter(ProductActivity.this, R.layout.item_product, products);
+                productAdapter = new ProductAdapter(productModels,ProductActivity.this);
                 lvProduct.setAdapter(productAdapter);
                 if (products.size() == 0)
                     Toast.makeText(ProductActivity.this, "Lỗi kết nối server, vui lòng thử lại", Toast.LENGTH_LONG).show();

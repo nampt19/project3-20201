@@ -27,6 +27,7 @@
             app:srcCompat="@drawable/ic_baseline_search_24" />
 
         <EditText
+            android:id="@+id/searchProduct"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@null"
